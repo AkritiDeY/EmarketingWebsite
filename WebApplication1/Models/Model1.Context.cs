@@ -29,5 +29,6 @@ namespace WebApplication1.Models
         public virtual DbSet<tbl_category> tbl_category { get; set; }
         public virtual DbSet<tbl_product> tbl_product { get; set; }
         public virtual DbSet<tbl_user> tbl_user { get; set; }
+        public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
     }
 }
