@@ -1,7 +1,9 @@
-﻿@model WebApplication1.Models.tbl_category
+﻿@model WebApplication1.Models.tbl_user
+
 @{
     Layout = null;
 }
+
 
 <style>
     #box {
@@ -46,13 +48,10 @@
 <script src="http://code.jquery.com/jquery.js"></script>
 <div id="main-div">
     <div id="box" class="img-responsive">
-        @using (Html.BeginForm("Create",
-                          "Admin",
-                          FormMethod.Post,
-                          new { enctype = "multipart/form-data" }))
+        @using (@Html.BeginForm())
         {
             <div class="insidebox">
-                <div> <h1>Add Category</h1></div>
+                <div> <h1>Log In</h1></div>
 
 
 
@@ -61,32 +60,28 @@
                     <div class="input-group">
                         <div class="input-group-addon"><span class="glyphicon glyphicon-user"></span></div>
                         @*<asp:TextBox ID="TextBox1" runat="server" class="form-control" placeholder="Username" required="required"></asp:TextBox>*@
-                        @Html.TextBoxFor(x => x.cat_name, new { @class = "form-control", @placeholder = "Username" })
+                        @Html.TextBoxFor(x => x.u_email, new { @class = "form-control", @placeholder = "Email" })
 
                     </div>
-                    <span style="color:red">   @Html.ValidationMessageFor(x => x.cat_name) </span>
+                    <span style="color:red">   @Html.ValidationMessageFor(x => x.u_email) </span>
 
                 </div>
-
-
                 <div class="form-group">
                     <div class="input-group">
-                        <div class="input-group-addon"><span class="glyphicon glyphicon-user"></span></div>
-
-                        <input type="file" name="imgfile" id="imgfile" class="form-control" required="required" />
-
-
+                        <div class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></div>
+                        @*<asp:TextBox ID="txtpassword" runat="server" class="form-control" placeholder="Password" TextMode="Password" required="required"></asp:TextBox>*@
+                        @Html.PasswordFor(x => x.u_password, new { @class = "form-control", @placeholder = "Password" })
 
                     </div>
-
-
+                    <span style="color:red">   @Html.ValidationMessageFor(x => x.u_password) </span>
                 </div>
 
 
 
-                <div class="form-group">
 
-                    <input type="submit" value="Add" class="btn btn-success btn-block" />
+                <div class="form-group">
+                    @*<asp:Button ID="Button1" runat="server" Text="Log In" class="form-control  btn-success" OnClick="Button1_Click" OnClientClick="retrun(passwordmatchfunc())" />*@
+                    <input type="submit" value="Login" class="btn btn-success btn-block" />
 
                 </div>
 
