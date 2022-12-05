@@ -40,10 +40,10 @@
           <Property Name="pro_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="pro_name" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="pro_image" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="prod_des" Type="nvarchar(max)" Nullable="false" />
           <Property Name="pro_price" Type="int" />
           <Property Name="pro_fk_cat" Type="int" />
           <Property Name="pro_fk_user" Type="int" />
+          <Property Name="pro_des" Type="nvarchar(max)" Nullable="false" />
         </EntityType>
         <EntityType Name="tbl_user">
           <Key>
@@ -143,7 +143,7 @@
           <Property Name="pro_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="pro_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="pro_image" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="prod_des" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+		  <Property Name="pro_des" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="pro_price" Type="Int32" />
           <Property Name="pro_fk_cat" Type="Int32" />
           <Property Name="pro_fk_user" Type="Int32" />
@@ -259,8 +259,8 @@
                 <ScalarProperty Name="pro_id" ColumnName="pro_id" />
                 <ScalarProperty Name="pro_name" ColumnName="pro_name" />
                 <ScalarProperty Name="pro_image" ColumnName="pro_image" />
-                <ScalarProperty Name="prod_des" ColumnName="prod_des" />
                 <ScalarProperty Name="pro_price" ColumnName="pro_price" />
+				  <ScalarProperty Name="pro_des" ColumnName="pro_des" />
                 <ScalarProperty Name="pro_fk_cat" ColumnName="pro_fk_cat" />
                 <ScalarProperty Name="pro_fk_user" ColumnName="pro_fk_user" />
               </MappingFragment>
