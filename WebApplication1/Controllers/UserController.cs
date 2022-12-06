@@ -132,8 +132,36 @@ namespace WebApplication1.Controllers
 
             return View(stu);
 
-
         }
+
+
+        public ActionResult ViewAd(int? id)
+        {
+            Adviewmodel ad = new Adviewmodel();
+            tbl_product p = db.tbl_product.Where(x => x.pro_id == id).SingleOrDefault();
+            ad.pro_id = p.pro_id;
+            ad.pro_name = p.pro_name;
+            ad.pro_image = p.pro_image;
+            ad.pro_price = p.pro_price;
+            tbl_category cat = db.tbl_category.Where(x => x.cat_id == p.pro_fk_cat).SingleOrDefault();
+            ad.cat_name = cat.cat_name;
+            tbl_user u = db.tbl_user.Where(x => x.u_id == p.pro_fk_user).SingleOrDefault();
+            ad.u_name = u.u_name;
+            ad.u_image = u.u_image;
+            ad.u_contact = u.u_contact;
+
+            return View(ad);
+        }
+
+
+        public ActionResult Signout()
+        {
+            Session.RemoveAll();
+            Session.Abandon();
+
+            return RedirectToAction("Index");
+        }
+
 
 
         public string uploadimgfile(HttpPostedFileBase file)
@@ -174,5 +202,12 @@ namespace WebApplication1.Controllers
 
             return path;
         }
+
+
+
+
+
+
+
     }
 }
