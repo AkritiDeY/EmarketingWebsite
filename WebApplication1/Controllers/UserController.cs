@@ -21,7 +21,6 @@ namespace WebApplication1.Controllers
             var list = db.tbl_category.Where(x => x.cat_status == 1).OrderByDescending(x => x.cat_id).ToList();
             IPagedList<tbl_category> stu = list.ToPagedList(pageindex, pagesize);
 
-
             return View(stu);
         }
         public ActionResult SignUp()
@@ -129,7 +128,6 @@ namespace WebApplication1.Controllers
             var list = db.tbl_product.Where(x => x.pro_fk_cat == id).OrderByDescending(x => x.pro_id).ToList();
             IPagedList<tbl_product> stu = list.ToPagedList(pageindex, pagesize);
 
-
             return View(stu);
 
         }
@@ -143,12 +141,14 @@ namespace WebApplication1.Controllers
             ad.pro_name = p.pro_name;
             ad.pro_image = p.pro_image;
             ad.pro_price = p.pro_price;
+            ad.pro_des = p.pro_des;
             tbl_category cat = db.tbl_category.Where(x => x.cat_id == p.pro_fk_cat).SingleOrDefault();
             ad.cat_name = cat.cat_name;
             tbl_user u = db.tbl_user.Where(x => x.u_id == p.pro_fk_user).SingleOrDefault();
             ad.u_name = u.u_name;
             ad.u_image = u.u_image;
             ad.u_contact = u.u_contact;
+            ad.pro_fk_user = u.u_id;
 
             return View(ad);
         }
@@ -162,6 +162,17 @@ namespace WebApplication1.Controllers
             return RedirectToAction("Index");
         }
 
+
+
+        public ActionResult DeleteAd(int? id)
+        {
+
+            tbl_product p = db.tbl_product.Where(x => x.pro_id == id).SingleOrDefault();
+            db.tbl_product.Remove(p);
+            db.SaveChanges();
+
+            return RedirectToAction("Index");
+        }
 
 
         public string uploadimgfile(HttpPostedFileBase file)
@@ -202,12 +213,5 @@ namespace WebApplication1.Controllers
 
             return path;
         }
-
-
-
-
-
-
-
     }
 }
