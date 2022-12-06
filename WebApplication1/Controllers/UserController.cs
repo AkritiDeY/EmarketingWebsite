@@ -21,6 +21,7 @@ namespace WebApplication1.Controllers
             var list = db.tbl_category.Where(x => x.cat_status == 1).OrderByDescending(x => x.cat_id).ToList();
             IPagedList<tbl_category> stu = list.ToPagedList(pageindex, pagesize);
 
+
             return View(stu);
         }
         public ActionResult SignUp()
@@ -128,7 +129,23 @@ namespace WebApplication1.Controllers
             var list = db.tbl_product.Where(x => x.pro_fk_cat == id).OrderByDescending(x => x.pro_id).ToList();
             IPagedList<tbl_product> stu = list.ToPagedList(pageindex, pagesize);
 
+
             return View(stu);
+
+
+        }
+
+        [HttpPost]
+        public ActionResult Ads(int? id, int? page, string search)
+        {
+            int pagesize = 9, pageindex = 1;
+            pageindex = page.HasValue ? Convert.ToInt32(page) : 1;
+            var list = db.tbl_product.Where(x => x.pro_name.Contains(search)).OrderByDescending(x => x.pro_id).ToList();
+            IPagedList<tbl_product> stu = list.ToPagedList(pageindex, pagesize);
+
+
+            return View(stu);
+
 
         }
 
@@ -149,6 +166,9 @@ namespace WebApplication1.Controllers
             ad.u_image = u.u_image;
             ad.u_contact = u.u_contact;
             ad.pro_fk_user = u.u_id;
+
+
+
 
             return View(ad);
         }
@@ -173,6 +193,13 @@ namespace WebApplication1.Controllers
 
             return RedirectToAction("Index");
         }
+
+
+
+
+
+
+
 
 
         public string uploadimgfile(HttpPostedFileBase file)
@@ -211,7 +238,16 @@ namespace WebApplication1.Controllers
                 path = "-1";
             }
 
+
+
             return path;
         }
+
+
+
+
+
+
+
     }
 }
