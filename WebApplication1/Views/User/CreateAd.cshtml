@@ -1,6 +1,6 @@
 ﻿@model WebApplication1.Models.tbl_product
 @{
-
+    
 }
 
 <style>
@@ -10,18 +10,18 @@
     }
 
     #main-div {
-        height: 900px;
-        background-image: url('../../Content/img/building6.jpg');
-        background-size: 100% 900px;
+        height: 100%;
+        background-image: url('../../Content/img/wallpaper-emarket.jpg');
+        background-size: 100%;
     }
 
     .insidebox {
         border: 1px solid black;
         margin: 10% auto 10% auto;
-        max-width: 500px;
-        min-width: 200px;
-        padding-left: 60px;
-        padding-right: 60px;
+        max-width: 400px;
+        min-width: 150px;
+        padding-left: 40px;
+        padding-right: 40px;
         border-radius: 10px;
         background-color: whitesmoke;
     }
@@ -52,75 +52,62 @@
             <div class="insidebox">
                 <div> <h1>Post An Ad</h1></div>
 
-
                 <div class="form-group">
                     <div class="input-group">
-                        <div class="input-group-addon"><span class="glyphicon glyphicon-user"></span></div>
+                        <div class="input-group-addon"><span class="glyphicon glyphicon-list"></span></div>
                         @Html.DropDownListFor(x => x.pro_fk_cat, ViewBag.categorylist as SelectList, "--select--", new { @class = "form-control" })
                     </div>
-                    <span style="color:red">   @Html.ValidationMessageFor(x => x.pro_fk_cat) </span>
-
+                    <span style="color:red"> @Html.ValidationMessageFor(x => x.pro_fk_cat) </span>
                 </div>
 
 
                 <div class="form-group">
                     <div class="input-group">
-                        <div class="input-group-addon"><span class="glyphicon glyphicon-user"></span></div>
-                        @*<asp:TextBox ID="TextBox1" runat="server" class="form-control" placeholder="Username" required="required"></asp:TextBox>*@
+                        <div class="input-group-addon"><span class="glyphicon glyphicon-pencil"></span></div>
                         @Html.TextBoxFor(x => x.pro_name, new { @class = "form-control", @placeholder = "Product Name" })
-
                     </div>
-                    <span style="color:red">   @Html.ValidationMessageFor(x => x.pro_name) </span>
-
+                    <span style="color:red"> @Html.ValidationMessageFor(x => x.pro_name) </span>
                 </div>
 
 
                 <div class="form-group">
                     <div class="input-group">
-                        <div class="input-group-addon"><span class="glyphicon glyphicon-user"></span></div>
-                        @*<asp:TextBox ID="TextBox1" runat="server" class="form-control" placeholder="Username" required="required"></asp:TextBox>*@
+                        <div class="input-group-addon"><span class="glyphicon glyphicon-usd"></span></div>
                         @Html.TextBoxFor(x => x.pro_price, new { @class = "form-control", @placeholder = "Price" })
-
                     </div>
-                    <span style="color:red">   @Html.ValidationMessageFor(x => x.pro_price) </span>
-
+                    <span style="color:red"> @Html.ValidationMessageFor(x => x.pro_price) </span>
                 </div>
+
 
                 <div class="form-group">
                     <div class="input-group">
-                        <div class="input-group-addon"><span class="glyphicon glyphicon-user"></span></div>
-                        @*<asp:TextBox ID="TextBox1" runat="server" class="form-control" placeholder="Username" required="required"></asp:TextBox>*@
+                        <div class="input-group-addon"><span class="glyphicon glyphicon-info-sign"></span></div>
                         @Html.TextAreaFor(x => x.pro_des, new { @class = "form-control", @placeholder = "Description" })
-
                     </div>
-                    <span style="color:red">   @Html.ValidationMessageFor(x => x.pro_des) </span>
-
+                    <span style="color:red"> @Html.ValidationMessageFor(x => x.pro_des) </span>
                 </div>
 
 
                 <div class="form-group">
                     <div class="input-group">
-                        <div class="input-group-addon"><span class="glyphicon glyphicon-user"></span></div>
-
+                        <div class="input-group-addon"><span class="glyphicon glyphicon-picture"></span></div>
                         <input type="file" name="imgfile" id="imgfile" class="form-control" required="required" />
-
                     </div>
                 </div>
 
 
                 <div class="form-group">
-
                     <input type="submit" value="Add" class="btn btn-success btn-block" />
-
                 </div>
+
 
                 <div class="form-group">
                     <p style="color:red">@ViewBag.error</p>
                 </div>
-            </div>
-         }
-    </div>
 
+            </div>
+        }
+    </div>
 </div>
 
 

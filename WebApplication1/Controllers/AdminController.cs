@@ -12,6 +12,7 @@ namespace WebApplication1.Controllers
     public class AdminController : Controller
     {
         dbmarketingEntities db = new dbmarketingEntities();
+
         // GET: Admin
         [HttpGet]
         public ActionResult login()
@@ -72,7 +73,9 @@ namespace WebApplication1.Controllers
             }
 
             return View();
-        } 
+        } //end,,,,,,,,,,,,,,,,,,,
+
+
 
         public ActionResult ViewCategory(int? page)
         {
@@ -80,7 +83,6 @@ namespace WebApplication1.Controllers
             pageindex = page.HasValue ? Convert.ToInt32(page) : 1;
             var list = db.tbl_category.Where(x => x.cat_status == 1).OrderByDescending(x => x.cat_id).ToList();
             IPagedList<tbl_category> stu = list.ToPagedList(pageindex, pagesize);
-
 
             return View(stu);
 
@@ -98,11 +100,9 @@ namespace WebApplication1.Controllers
                 {
                     try
                     {
-
                         path = Path.Combine(Server.MapPath("~/Content/upload"), random + Path.GetFileName(file.FileName));
                         file.SaveAs(path);
                         path = "~/Content/upload/" + random + Path.GetFileName(file.FileName);
-
                         //    ViewBag.Message = "File uploaded successfully";
                     }
                     catch (Exception ex)
@@ -123,7 +123,6 @@ namespace WebApplication1.Controllers
             }
 
             return path;
-
         }
     }
 }

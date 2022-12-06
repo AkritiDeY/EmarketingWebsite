@@ -12,24 +12,25 @@
     }
 
     #main-div {
-        height: 900px;
-        background-image: url('../../Content/img/wp_mount.jpg');
-        background-size: 100% 900px;
+        height: 100%;
+        background-image: url('../../Content/img/wallpaper-emarket.jpg');
+        background-size: 100%;
     }
 
     .insidebox {
         border: 1px solid black;
         margin: 10% auto 10% auto;
-        max-width: 500px;
-        min-width: 200px;
-        padding-left: 60px;
-        padding-right: 60px;
-        border-radius: 10px;
+        max-width: 400px;
+        min-width: 150px;
+        padding-left: 40px;
+        padding-right: 40px;
+        border-radius: 20px; 
         background-color: whitesmoke;
     }
 
     div h1 {
         text-align: center;
+        padding-bottom
     }
 
     p#para {
@@ -42,8 +43,6 @@
 <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
 
 
-
-
 <script src="js/bootstrap.min.js"></script>
 <script src="http://code.jquery.com/jquery.js"></script>
 <div id="main-div">
@@ -51,51 +50,38 @@
         @using (@Html.BeginForm())
         {
             <div class="insidebox">
-                <div> <h1>Log In</h1></div>
-
-
-
+                <div> <h1 style="color:black; font-family:sans-serif">Log In as User</h1></div>
 
                 <div class="form-group">
                     <div class="input-group">
                         <div class="input-group-addon"><span class="glyphicon glyphicon-user"></span></div>
-                        @*<asp:TextBox ID="TextBox1" runat="server" class="form-control" placeholder="Username" required="required"></asp:TextBox>*@
                         @Html.TextBoxFor(x => x.u_email, new { @class = "form-control", @placeholder = "Email" })
-
                     </div>
-                    <span style="color:red">   @Html.ValidationMessageFor(x => x.u_email) </span>
+                    <span style="color:red"> @Html.ValidationMessageFor(x => x.u_email) </span>
+
 
                 </div>
                 <div class="form-group">
                     <div class="input-group">
                         <div class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></div>
-                        @*<asp:TextBox ID="txtpassword" runat="server" class="form-control" placeholder="Password" TextMode="Password" required="required"></asp:TextBox>*@
                         @Html.PasswordFor(x => x.u_password, new { @class = "form-control", @placeholder = "Password" })
-
                     </div>
-                    <span style="color:red">   @Html.ValidationMessageFor(x => x.u_password) </span>
+                    <span style="color:red"> @Html.ValidationMessageFor(x => x.u_password) </span>
                 </div>
 
 
-
-
                 <div class="form-group">
-                    @*<asp:Button ID="Button1" runat="server" Text="Log In" class="form-control  btn-success" OnClick="Button1_Click" OnClientClick="retrun(passwordmatchfunc())" />*@
-                    <input type="submit" value="Login" class="btn btn-success btn-block" />
-
+                    <input type="submit" value="Login" class="btn btn-danger btn-block" />
+                    <br />
                 </div>
 
                 <div class="form-group">
                     <p style="color:red">@ViewBag.error</p>
                 </div>
 
-
-
             </div>
-
         }
     </div>
-
 </div>
 
 

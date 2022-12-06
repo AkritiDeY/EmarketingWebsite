@@ -13,6 +13,7 @@ namespace WebApplication1.Controllers
     {
 
         dbmarketingEntities db = new dbmarketingEntities();
+
         // GET: User
         public ActionResult Index(int? page)
         {
@@ -21,14 +22,15 @@ namespace WebApplication1.Controllers
             var list = db.tbl_category.Where(x => x.cat_status == 1).OrderByDescending(x => x.cat_id).ToList();
             IPagedList<tbl_category> stu = list.ToPagedList(pageindex, pagesize);
 
-
             return View(stu);
         }
+
         public ActionResult SignUp()
         {
 
             return View();
         }
+
 
         [HttpPost]
         public ActionResult SignUp(tbl_user uvm, HttpPostedFileBase imgfile)
@@ -49,7 +51,6 @@ namespace WebApplication1.Controllers
                 db.tbl_user.Add(u);
                 db.SaveChanges();
                 return RedirectToAction("Login");
-
             }
 
             return View();
@@ -67,15 +68,12 @@ namespace WebApplication1.Controllers
             tbl_user ad = db.tbl_user.Where(x => x.u_email == avm.u_email && x.u_password == avm.u_password).SingleOrDefault();
             if (ad != null)
             {
-
                 Session["u_id"] = ad.u_id.ToString();
                 return RedirectToAction("Index");
-
             }
             else
             {
                 ViewBag.error = "Invalid username or password";
-
             }
 
             return View();
@@ -129,10 +127,7 @@ namespace WebApplication1.Controllers
             var list = db.tbl_product.Where(x => x.pro_fk_cat == id).OrderByDescending(x => x.pro_id).ToList();
             IPagedList<tbl_product> stu = list.ToPagedList(pageindex, pagesize);
 
-
             return View(stu);
-
-
         }
 
         [HttpPost]
@@ -143,10 +138,7 @@ namespace WebApplication1.Controllers
             var list = db.tbl_product.Where(x => x.pro_name.Contains(search)).OrderByDescending(x => x.pro_id).ToList();
             IPagedList<tbl_product> stu = list.ToPagedList(pageindex, pagesize);
 
-
             return View(stu);
-
-
         }
 
 
@@ -167,9 +159,6 @@ namespace WebApplication1.Controllers
             ad.u_contact = u.u_contact;
             ad.pro_fk_user = u.u_id;
 
-
-
-
             return View(ad);
         }
 
@@ -182,24 +171,14 @@ namespace WebApplication1.Controllers
             return RedirectToAction("Index");
         }
 
-
-
         public ActionResult DeleteAd(int? id)
         {
-
             tbl_product p = db.tbl_product.Where(x => x.pro_id == id).SingleOrDefault();
             db.tbl_product.Remove(p);
             db.SaveChanges();
 
             return RedirectToAction("Index");
         }
-
-
-
-
-
-
-
 
 
         public string uploadimgfile(HttpPostedFileBase file)
@@ -238,16 +217,7 @@ namespace WebApplication1.Controllers
                 path = "-1";
             }
 
-
-
             return path;
         }
-
-
-
-
-
-
-
     }
 }
