@@ -13,29 +13,26 @@ namespace WebApplication1.Controllers
     {
         dbmarketingEntities db = new dbmarketingEntities();
 
-        // GET: Admin
+        // GET: Login page appears
         [HttpGet]
         public ActionResult login()
         {
             return View();
         }
 
-
+        //POST: Action performed in the Login Page : Admin login
         [HttpPost]
         public ActionResult login(tbl_admin avm)
         {
             tbl_admin ad = db.tbl_admin.Where(x => x.ad_username == avm.ad_username && x.ad_password == avm.ad_password).SingleOrDefault();
             if (ad != null)
             {
-
                 Session["ad_id"] = ad.ad_id.ToString();
                 return RedirectToAction("Create");
-
             }
             else
             {
                 ViewBag.error = "Invalid username or password";
-
             }
 
             return View();
@@ -44,14 +41,14 @@ namespace WebApplication1.Controllers
 
         public ActionResult Create()
         {
-            if (Session["ad_id"] == null)
+            if (Session["ad_id"] == null) // if session is not active, then again login
             {
                 return RedirectToAction("login");
             }
             return View();
         }
 
-
+        //POST: Action performed in Create page -> creating a category
         [HttpPost]
         public ActionResult Create(tbl_category cvm, HttpPostedFileBase imgfile)
         {
@@ -73,21 +70,9 @@ namespace WebApplication1.Controllers
             }
 
             return View();
-        } //end,,,,,,,,,,,,,,,,,,,
-
-
-
-        public ActionResult ViewCategory(int? page)
-        {
-            int pagesize = 9, pageindex = 1;
-            pageindex = page.HasValue ? Convert.ToInt32(page) : 1;
-            var list = db.tbl_category.Where(x => x.cat_status == 1).OrderByDescending(x => x.cat_id).ToList();
-            IPagedList<tbl_category> stu = list.ToPagedList(pageindex, pagesize);
-
-            return View(stu);
-
         }
 
+        // Method for uploading image for a category that takes only jpg,jpeg & png as extensions
         public string uploadimgfile(HttpPostedFileBase file)
         {
             Random r = new Random();
@@ -124,5 +109,20 @@ namespace WebApplication1.Controllers
 
             return path;
         }
+        
+
+        // Pagination for inside a category page
+        public ActionResult ViewCategory(int? page)
+        {
+            int pagesize = 9, pageindex = 1;
+            pageindex = page.HasValue ? Convert.ToInt32(page) : 1;
+            var list = db.tbl_category.Where(x => x.cat_status == 1).OrderByDescending(x => x.cat_id).ToList();
+            IPagedList<tbl_category> stu = list.ToPagedList(pageindex, pagesize);
+
+            return View(stu);
+
+        }
+
+
     }
 }

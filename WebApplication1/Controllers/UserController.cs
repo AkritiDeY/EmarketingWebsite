@@ -14,7 +14,7 @@ namespace WebApplication1.Controllers
 
         dbmarketingEntities db = new dbmarketingEntities();
 
-        // GET: User
+        //Pagination for Main categories page
         public ActionResult Index(int? page)
         {
             int pagesize = 9, pageindex = 1;
@@ -25,13 +25,13 @@ namespace WebApplication1.Controllers
             return View(stu);
         }
 
+        // GET: User Sign Up 
         public ActionResult SignUp()
         {
-
             return View();
         }
 
-
+        //POST: Action performed in the SignUp Page : New User SignUp
         [HttpPost]
         public ActionResult SignUp(tbl_user uvm, HttpPostedFileBase imgfile)
         {
@@ -54,14 +54,15 @@ namespace WebApplication1.Controllers
             }
 
             return View();
-        } //method......................... end.....................
+        }
 
+        //GET: Login page appears
         public ActionResult login()
         {
             return View();
         }
 
-
+        //POST: Action performed in the Login Page : Admin login
         [HttpPost]
         public ActionResult login(tbl_user avm)
         {
@@ -79,7 +80,7 @@ namespace WebApplication1.Controllers
             return View();
         }
 
-
+        //GET: Show list of created Ad according to the choosen category
         [HttpGet]
         public ActionResult CreateAd()
         {
@@ -89,6 +90,7 @@ namespace WebApplication1.Controllers
             return View();
         }
 
+        //POST: Create the Ad according to the choosen category
         [HttpPost]
         public ActionResult CreateAd(tbl_product pvm, HttpPostedFileBase imgfile)
         {
@@ -119,29 +121,7 @@ namespace WebApplication1.Controllers
             return View();
         }
 
-
-        public ActionResult Ads(int? id, int? page)
-        {
-            int pagesize = 9, pageindex = 1;
-            pageindex = page.HasValue ? Convert.ToInt32(page) : 1;
-            var list = db.tbl_product.Where(x => x.pro_fk_cat == id).OrderByDescending(x => x.pro_id).ToList();
-            IPagedList<tbl_product> stu = list.ToPagedList(pageindex, pagesize);
-
-            return View(stu);
-        }
-
-        [HttpPost]
-        public ActionResult Ads(int? id, int? page, string search)
-        {
-            int pagesize = 9, pageindex = 1;
-            pageindex = page.HasValue ? Convert.ToInt32(page) : 1;
-            var list = db.tbl_product.Where(x => x.pro_name.Contains(search)).OrderByDescending(x => x.pro_id).ToList();
-            IPagedList<tbl_product> stu = list.ToPagedList(pageindex, pagesize);
-
-            return View(stu);
-        }
-
-
+        // Details shown in a Ads Page
         public ActionResult ViewAd(int? id)
         {
             Adviewmodel ad = new Adviewmodel();
@@ -162,7 +142,7 @@ namespace WebApplication1.Controllers
             return View(ad);
         }
 
-
+        //Signout current user session
         public ActionResult Signout()
         {
             Session.RemoveAll();
@@ -171,6 +151,7 @@ namespace WebApplication1.Controllers
             return RedirectToAction("Index");
         }
 
+        //Delete an Ad but only the Ad owner can delete it
         public ActionResult DeleteAd(int? id)
         {
             tbl_product p = db.tbl_product.Where(x => x.pro_id == id).SingleOrDefault();
@@ -219,5 +200,29 @@ namespace WebApplication1.Controllers
 
             return path;
         }
+
+        //Pagination in Ads page
+        public ActionResult Ads(int? id, int? page)
+        {
+            int pagesize = 9, pageindex = 1;
+            pageindex = page.HasValue ? Convert.ToInt32(page) : 1;
+            var list = db.tbl_product.Where(x => x.pro_fk_cat == id).OrderByDescending(x => x.pro_id).ToList();
+            IPagedList<tbl_product> stu = list.ToPagedList(pageindex, pagesize);
+
+            return View(stu);
+        }
+
+        //Search functionality
+        [HttpPost]
+        public ActionResult Ads(int? id, int? page, string search)
+        {
+            int pagesize = 9, pageindex = 1;
+            pageindex = page.HasValue ? Convert.ToInt32(page) : 1;
+            var list = db.tbl_product.Where(x => x.pro_name.Contains(search)).OrderByDescending(x => x.pro_id).ToList();
+            IPagedList<tbl_product> stu = list.ToPagedList(pageindex, pagesize);
+
+            return View(stu);
+        }
+
     }
 }
